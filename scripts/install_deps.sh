@@ -95,7 +95,8 @@ Darwin)
     brew install \
         leveldb \
         libmicrohttpd \
-        miniupnpc
+        miniupnpc \
+        cryptopp
 
     ;;
 
