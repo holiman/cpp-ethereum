@@ -10,12 +10,9 @@ find_package(Utils)
 
 target_include_directories(devcrypto PRIVATE ..)
 target_include_directories(devcrypto PRIVATE ../utils)
-target_link_libraries(devcrypto ${Dev_DEVCORE_LIBRARIES})
-target_link_libraries(devcrypto ${Utils_SCRYPT_LIBRARIES})
-target_link_libraries(devcrypto cryptopp)
-
-if (NOT EMSCRIPTEN)
-	target_link_libraries(devcrypto ${Utils_SECP256K1_LIBRARIES})
-endif ()
+# Place cryptopp first not to accidently include headers from system level installation of Crypto++
+target_link_libraries(devcrypto
+		PRIVATE cryptopp ${Utils_SECP256K1_LIBRARIES} ${Utils_SCRYPT_LIBRARIES}
+		PUBLIC ${Dev_DEVCORE_LIBRARIES})
 
 install(TARGETS devcrypto RUNTIME DESTINATION bin ARCHIVE DESTINATION lib LIBRARY DESTINATION lib)
