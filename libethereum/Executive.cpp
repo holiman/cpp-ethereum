@@ -127,7 +127,7 @@ void StandardTrace::operator()(uint64_t _steps, uint64_t PC, Instruction inst, b
 
 	if (m_showMnemonics)
 		r["opName"] = instructionInfo(inst).name;
-	r["op"] = toString(inst);
+	r["op"] = inst;
 	r["memSize"] = toString(vm.memory().size());
 	r["pc"] = toString(PC);
 	r["gas"] = toString(gas);
